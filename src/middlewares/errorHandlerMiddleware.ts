@@ -1,8 +1,16 @@
 import { Request, Response } from "express";
 
 interface iError {
-	type: string;
+	type: ErrorCode;
 	message: string;
+}
+enum ErrorCode {
+	BAD_REQUEST = 400,
+	UNAUTHORIZED = 401,
+	NOT_FOUND = 404,
+	CONFLICT = 409,
+	UNPROCESSABLE = 422,
+	INTERNAL_SERVER_ERROR = 500,
 }
 
 export default function errorHandlerMiddleware(
@@ -11,23 +19,20 @@ export default function errorHandlerMiddleware(
 	res: Response
 ) {
 	console.log(err);
-	if (err.type === "not-found") {
-		return res.status(404).send(err.message);
+	if (err.type === ErrorCode.BAD_REQUEST) {
+		return res.status(ErrorCode.BAD_REQUEST).send(err.message);
 	}
-	if (err.type === "conflict") {
-		return res.status(409).send(err.message);
+	if (err.type === ErrorCode.UNAUTHORIZED) {
+		return res.status(ErrorCode.UNAUTHORIZED).send(err.message);
 	}
-	if (err.type === "unprocessable") {
-		return res.status(422).send(err.message);
+	if (err.type === ErrorCode.NOT_FOUND) {
+		return res.status(ErrorCode.NOT_FOUND).send(err.message);
 	}
-	if (err.type === "generic") {
-		return res.status(400).send(err.message);
+	if (err.type === ErrorCode.CONFLICT) {
+		return res.status(ErrorCode.CONFLICT).send(err.message);
 	}
-	if (err.type === "unauthorized") {
-		return res.status(401).send(err.message);
+	if (err.type === ErrorCode.UNPROCESSABLE) {
+		return res.status(ErrorCode.UNPROCESSABLE).send(err.message);
 	}
-	if (err.type === "wrong-body-format") {
-		return res.status(422).send(err.message);
-	}
-	return res.status(500).send("Untracked error");
+	return res.status(ErrorCode.INTERNAL_SERVER_ERROR).send(err.message);
 }
