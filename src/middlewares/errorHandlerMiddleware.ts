@@ -4,7 +4,7 @@ interface iError {
 	type: ErrorCode;
 	message: string;
 }
-enum ErrorCode {
+export enum ErrorCode {
 	BAD_REQUEST = 400,
 	UNAUTHORIZED = 401,
 	NOT_FOUND = 404,
@@ -19,20 +19,7 @@ export default function errorHandlerMiddleware(
 	res: Response
 ) {
 	console.log(err);
-	if (err.type === ErrorCode.BAD_REQUEST) {
-		return res.status(ErrorCode.BAD_REQUEST).send(err.message);
-	}
-	if (err.type === ErrorCode.UNAUTHORIZED) {
-		return res.status(ErrorCode.UNAUTHORIZED).send(err.message);
-	}
-	if (err.type === ErrorCode.NOT_FOUND) {
-		return res.status(ErrorCode.NOT_FOUND).send(err.message);
-	}
-	if (err.type === ErrorCode.CONFLICT) {
-		return res.status(ErrorCode.CONFLICT).send(err.message);
-	}
-	if (err.type === ErrorCode.UNPROCESSABLE) {
-		return res.status(ErrorCode.UNPROCESSABLE).send(err.message);
-	}
-	return res.status(ErrorCode.INTERNAL_SERVER_ERROR).send(err.message);
+	return res
+		.status(err.type || 500)
+		.send(err.message || "Internal Server Error");
 }
