@@ -12,8 +12,13 @@
 	},
 	"plugins": ["@typescript-eslint"],
 	"rules": {
+		"no-console": "error",
 		"indent": ["error", "tab"],
 		"quotes": ["error", "double"],
-		"semi": ["error", "always"]
+		"semi": ["error", "always"],
+		"@typescript-eslint/no-namespace": "off",
+		"import/newline-after-import": ["error"],
+		"lines-between-class-members": ["error", "always"],
+		"import/no-unresolved": "error"
 	}
 }
