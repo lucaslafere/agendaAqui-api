@@ -17,8 +17,6 @@
 		"quotes": ["error", "double"],
 		"semi": ["error", "always"],
 		"@typescript-eslint/no-namespace": "off",
-		"import/newline-after-import": ["error"],
-		"lines-between-class-members": ["error", "always"],
-		"import/no-unresolved": "error"
+		"lines-between-class-members": ["error", "always"]
 	}
 }
