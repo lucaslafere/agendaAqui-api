@@ -3,4 +3,5 @@ import * as manipulateToken from "../utils/manipulateToken";
 
 export async function createAdmin(req: Request, res: Response) {
 	const { name, email, password } = req.body;
+	return res.status(201).send("Created");
 }
