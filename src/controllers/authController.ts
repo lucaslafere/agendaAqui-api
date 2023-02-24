@@ -4,8 +4,13 @@ import { adminLoginSchema, adminRegisterSchema } from "../schemas/authSchema";
 import * as manipulateToken from "../utils/manipulateToken";
 
 export async function registerAdmin(req: Request, res: Response) {
-	const { name, email, password } = req.body;
-	const { error } = adminRegisterSchema.validate({ name, email, password });
+	const { name, email, password, confirmPassword } = req.body;
+	const { error } = adminRegisterSchema.validate({
+		name,
+		email,
+		password,
+		confirmPassword,
+	});
 	if (error) throw { type: ErrorCode.UNPROCESSABLE, message: error.message };
 	return res.status(201).send("Registered");
 }
