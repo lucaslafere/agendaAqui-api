@@ -1,7 +1,7 @@
 import { admins } from "@prisma/client";
 
-type AdminSignUpData = Pick<admins, "email" | "password" | "name">;
-export interface iAdminSignUp extends AdminSignUpData {
+type AdminRegisterData = Pick<admins, "email" | "password" | "name">;
+export interface iAdminRegister extends AdminRegisterData {
 	confirmPassword: string;
 }
 

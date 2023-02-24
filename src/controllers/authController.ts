@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import { ErrorCode } from "../middlewares/errorHandlerMiddleware";
-import { adminLoginSchema, adminSignUpSchema } from "../schemas/authSchema";
+import { adminLoginSchema, adminRegisterSchema } from "../schemas/authSchema";
 import * as manipulateToken from "../utils/manipulateToken";
 
-export async function createAdmin(req: Request, res: Response) {
+export async function registerAdmin(req: Request, res: Response) {
 	const { name, email, password } = req.body;
-	const { error } = adminSignUpSchema.validate({ name, email, password });
+	const { error } = adminRegisterSchema.validate({ name, email, password });
 	if (error) throw { type: ErrorCode.UNPROCESSABLE, message: error.message };
-	return res.status(201).send("Created");
+	return res.status(201).send("Registered");
 }
 export async function loginAdmin(req: Request, res: Response) {
 	const { email, password } = req.body;

@@ -1,6 +1,6 @@
 import joi from "joi";
-import { AdminLoginData, iAdminSignUp } from "../types/authType.js";
-export const adminSignUpSchema = joi.object<iAdminSignUp>({
+import { AdminLoginData, iAdminRegister } from "../types/authType.js";
+export const adminRegisterSchema = joi.object<iAdminRegister>({
 	email: joi
 		.string()
 		.email({ tlds: { allow: false } })
