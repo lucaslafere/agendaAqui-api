@@ -24,10 +24,8 @@ enum HttpStatusCode {
 export default function errorHandlerMiddleware(
 	err: iError,
 	req: Request,
-	res: Response,
-	_next: NextFunction
+	res: Response
 ) {
-	console.log(err);
 	if (err.type === "not-found") {
 		return res.status(HttpStatusCode.NOT_FOUND).send(err.message);
 	}
